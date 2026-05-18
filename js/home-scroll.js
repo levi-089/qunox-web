@@ -219,44 +219,46 @@ export function initScrollAnimations(qunoxScene) {
     document.querySelectorAll('.svc-title').forEach(t => {
       if (t !== document.querySelector(`.svc-title[data-svc="${newIdx}"]`)) {
         gsap.killTweensOf(t);
-        t.classList.remove('active');
-        gsap.set(t, { clearProps: 'all' });
+        gsap.to(t, { opacity: 0, y: dir * -18, duration: 0.3, ease: 'power3.in',
+          onComplete: () => { t.classList.remove('active'); gsap.set(t, { clearProps: 'all' }); }
+        });
       }
     });
     const newTitle = document.querySelector(`.svc-title[data-svc="${newIdx}"]`);
-    gsap.set(newTitle, { y: dir * 10, opacity: 0 });
+    gsap.set(newTitle, { y: dir * 28, opacity: 0 });
     newTitle.classList.add('active');
-    gsap.to(newTitle, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' });
+    gsap.to(newTitle, { y: 0, opacity: 1, duration: 0.65, ease: 'power4.out' });
 
     // ── Image ──────────────────────────────────────
     const oldImg = oldIdx >= 0 ? document.querySelector(`.svc-img[data-svc="${oldIdx}"]`) : null;
     const newImg = document.querySelector(`.svc-img[data-svc="${newIdx}"]`);
     if (oldImg) {
-      gsap.to(oldImg, { opacity: 0, duration: 0.25, ease: 'power2.in',
-        onComplete: () => oldImg.classList.remove('active') });
+      gsap.to(oldImg, { opacity: 0, scale: 1.04, duration: 0.45, ease: 'power2.in',
+        onComplete: () => { oldImg.classList.remove('active'); gsap.set(oldImg, { scale: 1 }); }
+      });
     }
-    gsap.set(newImg, { opacity: 0 });
+    gsap.set(newImg, { opacity: 0, scale: 1.06 });
     newImg.classList.add('active');
-    gsap.to(newImg, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+    gsap.to(newImg, { opacity: 1, scale: 1, duration: 0.7, ease: 'power3.out' });
 
     // ── Copy + link ────────────────────────────────
     const copyEl = document.getElementById('services-copy-text');
     const linkEl = document.getElementById('services-link');
     gsap.killTweensOf([copyEl, linkEl]);
     gsap.to([copyEl, linkEl], {
-      opacity: 0, y: dir * 5, duration: 0.15, ease: 'power2.in',
+      opacity: 0, y: dir * 8, duration: 0.2, ease: 'power2.in',
       onComplete: () => {
         copyEl.textContent = svc.copy;
         linkEl.href = svc.link;
         gsap.fromTo([copyEl, linkEl],
-          { opacity: 0, y: dir * -5 },
-          { opacity: 1, y: 0, duration: 0.3, stagger: 0.05, ease: 'power2.out' }
+          { opacity: 0, y: dir * -10 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, ease: 'power3.out' }
         );
       }
     });
 
     // ── Accent bar ─────────────────────────────────
-    gsap.fromTo(_accentBar, { width: '0%' }, { width: '100%', duration: 0.35, ease: 'power2.out' });
+    gsap.fromTo(_accentBar, { width: '0%' }, { width: '100%', duration: 0.55, ease: 'power3.out' });
   }
 
   // ── Pin — no snap, user controls scroll entirely.
@@ -276,22 +278,22 @@ export function initScrollAnimations(qunoxScene) {
     }
   });
 
-  // ── BACKGROUND CURTAIN: scrub: 0.2 for immediate response ────────────────
-  // Each segment = 300/6 = 50vh. Curtain sweeps over 40% = 20vh.
+  // ── BACKGROUND CURTAIN: smoother scrub for a more natural wipe ──────────
+  // Each segment = 300/6 = 50vh. Curtain sweeps over 65% = 32.5vh.
   const segVh  = 300 / 6;
-  const wipeVh = segVh * 0.4;
+  const wipeVh = segVh * 0.65;
 
   for (let i = 1; i <= 5; i++) {
     gsap.fromTo(`.svc-bg[data-bg="${i}"]`,
       { clipPath: 'inset(100% 0 0 0)' },
       {
         clipPath: 'inset(0% 0 0 0)',
-        ease: 'none',
+        ease: 'power1.inOut',
         scrollTrigger: {
           trigger: '#scene-services',
           start: `top+=${i * segVh}vh top`,
           end:   `top+=${i * segVh + wipeVh}vh top`,
-          scrub: 0.2
+          scrub: 1.2
         }
       }
     );
