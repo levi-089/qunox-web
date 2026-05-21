@@ -744,7 +744,7 @@ body.ready .page-wrap { opacity: 1; }
 .scene--about {
   min-height: auto;
   background: linear-gradient(to bottom, #E8E8E8 0%, #E8E8E8 60%, #0a0a0a 100%);
-  padding: 7rem 4rem 0;
+  padding: 7rem 4rem 3rem;
   position: relative;
   display: flex;
   flex-direction: column;
