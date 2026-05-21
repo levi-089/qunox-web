@@ -247,6 +247,8 @@ body.ready .page-wrap { opacity: 1; }
   font-size: 0.65rem; font-weight: 600;
   letter-spacing: 0.15em; text-transform: uppercase;
   padding: 0.25rem 0.65rem; border-radius: 2px;
+  min-width: 8.5rem;
+  text-align: center;
 }
 
 .diag-item__status--warn { background: rgba(67,97,238,0.18); color: rgba(120,150,255,0.9); }
