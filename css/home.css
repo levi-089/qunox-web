@@ -945,6 +945,245 @@ body.ready .page-wrap { opacity: 1; }
 .services__mobile-grid { display: none; }
 
 /* ================================================
+   SCENE — SANGFOR / TECNOLOGÍA NUEVA GENERACIÓN
+   Sticky-left / scrolling-right layout.
+   Dark theme continuing from the diagnostic section.
+   ================================================ */
+.scene--sangfor {
+  background: #080808;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* ── Animated background glow ── */
+.sangfor__bg {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(ellipse 65% 55% at 15% 35%, rgba(67, 97, 238, 0.13) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 70% at 85% 65%, rgba(114, 9, 183, 0.09) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 50% 10%, rgba(100, 130, 255, 0.06) 0%, transparent 55%);
+  animation: sangforGlow 10s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes sangforGlow {
+  from { transform: scale(1) translate(0%, 0%); }
+  to   { transform: scale(1.08) translate(4%, 3%); }
+}
+
+/* ── Inner grid: left sticky / right scroll ── */
+.sangfor__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+/* ── LEFT — sticky title block ── */
+.sangfor__left {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4rem 0 1rem;
+}
+
+.sangfor__eyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(100, 130, 255, 0.75);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.sangfor__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 22px; height: 1px;
+  background: rgba(100, 130, 255, 0.6);
+}
+
+.sangfor__headline {
+  font-family: var(--font-head, 'Space Grotesk', sans-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+}
+
+.sangfor__body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.42);
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+}
+
+/* Sangfor badge */
+.sangfor__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  width: fit-content;
+}
+.sangfor__badge-logo {
+  height: 20px;
+  width: auto;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+.sangfor__badge span {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* ── RIGHT — scrolling cards ── */
+.sangfor__right {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 10vh 0 12vh 0;
+}
+
+.sangfor__card {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3.5rem 1rem 3.5rem 2rem;
+  position: relative;
+  transition: border-color 0.3s ease;
+}
+.sangfor__card:hover {
+  border-top-color: rgba(100, 130, 255, 0.35);
+}
+
+.sangfor__card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sangfor__card-title {
+  font-family: var(--font-head, 'Space Grotesk', sans-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.sangfor__card-num {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(100, 130, 255, 0.9);
+  background: rgba(100, 130, 255, 0.12);
+  border: 1px solid rgba(100, 130, 255, 0.25);
+  border-radius: 3px;
+  padding: 0.25rem 0.55rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.sangfor__card-desc {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.85rem, 1vw, 0.95rem);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 480px;
+  margin: 0;
+}
+
+/* ── Impact phrase ── */
+.sangfor__impact {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 4rem 2rem 5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  margin: 0 2.5rem;
+}
+
+.sangfor__impact-text {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: clamp(0.8rem, 1.1vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  margin: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(100, 130, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.85) 40%,
+    rgba(180, 100, 255, 0.85) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Transition into services: fade bottom edge to warm gray */
+.scene--sangfor::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #EAEAE4);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ── Mobile ── */
+@media (max-width: 860px) {
+  .sangfor__inner {
+    grid-template-columns: 1fr;
+    padding: 0 1.5rem;
+  }
+  .sangfor__left {
+    position: relative;
+    height: auto;
+    padding: 5rem 0 2rem;
+  }
+  .sangfor__right {
+    padding: 2rem 0 6rem;
+  }
+  .sangfor__card {
+    padding: 2.5rem 0;
+  }
+  .sangfor__impact {
+    margin: 0 0;
+    padding: 3rem 0 4rem;
+  }
+}
+
+/* ================================================
    RESPONSIVE — MOBILE
    ================================================ */
 @media (max-width: 768px) {
