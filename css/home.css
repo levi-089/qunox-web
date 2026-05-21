@@ -152,6 +152,48 @@ body.ready .page-wrap { opacity: 1; }
   position: relative;
   z-index: var(--z-content);
   padding: 8rem 4rem;
+  overflow: hidden;
+}
+
+/* Background image with dark overlay */
+.scene--diagnostic::before {
+  content: '';
+  position: absolute;
+  inset: -8%;
+  background-image: url('../images/Fondo web 2.png');
+  background-size: cover;
+  background-position: center;
+  animation: diagBgDrift 30s ease-in-out infinite alternate;
+  will-change: transform;
+  z-index: 0;
+}
+
+/* Dark gradient overlay — keeps all text legible */
+.scene--diagnostic::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.68) 50%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes diagBgDrift {
+  0%   { transform: scale(1.06) translate(0%,    0%);   }
+  33%  { transform: scale(1.09) translate(-1.5%, 0.8%); }
+  66%  { transform: scale(1.08) translate(-2%,  -0.6%); }
+  100% { transform: scale(1.06) translate(0%,    0%);   }
+}
+
+/* All direct children must sit above the overlays */
+.diagnostic__container {
+  position: relative;
+  z-index: 2;
 }
 
 .diagnostic__container { width: 100%; max-width: 1100px; margin: 0 auto; }
