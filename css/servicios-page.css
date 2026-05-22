@@ -72,6 +72,40 @@
   100%  { transform: scaleY(0); transform-origin: bottom; }
 }
 
+
+/* ── SERVICES SECTION WRAPPER ────────────────── */
+/* Contenedor con la imagen de fondo animada que
+   subyace todas las tarjetas del grid.            */
+.services-section {
+  position: relative;
+  overflow: hidden;
+  z-index: 2; /* sobre el video pinneado */
+}
+
+/* Capa de imagen — separada del DOM para animarse
+   con GPU sin afectar el layout de las cards.     */
+.services-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../images/Fondo web 4.jpg') center / cover no-repeat;
+  /* scale(1.18) da margen para el drift sin revelar bordes */
+  animation: svcBgDrift 40s ease-in-out infinite;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* Movimiento continuo y orgánico de la imagen    */
+@keyframes svcBgDrift {
+  0%   { transform: translate(  0%,    0%)  scale(1.18); }
+  20%  { transform: translate(-2.5%, -1.5%) scale(1.18); }
+  40%  { transform: translate(-4%,   -3.5%) scale(1.18); }
+  60%  { transform: translate(-2%,   -5%)   scale(1.18); }
+  80%  { transform: translate( 1.5%, -2.5%) scale(1.18); }
+  100% { transform: translate(  0%,    0%)  scale(1.18); }
+}
+
+
 /* ── GRID ────────────────────────────────────── */
 .services-grid {
   display: grid;
@@ -79,9 +113,9 @@
   grid-template-rows: repeat(2, 1fr);
   height: calc(100vh - 90px);
   gap: 2px;
-  background: #AAAAAA;
+  background: rgba(0, 0, 0, 0.55); /* separador oscuro entre cards */
   position: relative;
-  z-index: 2; /* sube por encima del video pinneado */
+  z-index: 1; /* sobre el ::before del wrapper */
 }
 
 /* Card base */
@@ -94,20 +128,20 @@
   transition: filter 0.35s ease;
 }
 
-/* Ocultar imágenes y overlay de gradiente */
+/* Ocultar imágenes originales — fondo viene del wrapper */
 .svc-card__img    { display: none; }
 .svc-card__overlay { display: none; }
 
-/* ── Colores sólidos alternados ─────────────── */
-.svc-card:nth-child(1) { background: #111111; }  /* Soporte        → muy oscuro  */
-.svc-card:nth-child(2) { background: #787878; }  /* Optimización   → gris medio  */
-.svc-card:nth-child(3) { background: #1A1A1A; }  /* Implementación → muy oscuro  */
-.svc-card:nth-child(4) { background: #6E6E6E; }  /* DR             → gris medio  */
-.svc-card:nth-child(5) { background: #0D0D0D; }  /* Multi-Cloud    → muy oscuro  */
-.svc-card:nth-child(6) { background: #737373; }  /* Ciberseguridad → gris medio  */
+/* ── Fondos semitransparentes: la imagen se ve a través ── */
+.svc-card:nth-child(1) { background: rgba(10,  10,  10,  0.80); } /* Soporte        */
+.svc-card:nth-child(2) { background: rgba(55,  55,  55,  0.60); } /* Optimización   */
+.svc-card:nth-child(3) { background: rgba(15,  15,  15,  0.80); } /* Implementación */
+.svc-card:nth-child(4) { background: rgba(48,  48,  48,  0.60); } /* DR             */
+.svc-card:nth-child(5) { background: rgba( 8,   8,   8,  0.80); } /* Multi-Cloud    */
+.svc-card:nth-child(6) { background: rgba(50,  50,  50,  0.60); } /* Ciberseguridad */
 
-/* Hover: ligero brillo/oscurecimiento */
-.svc-card:hover { filter: brightness(0.90); }
+/* Hover: aligera la capa para revelar más imagen */
+.svc-card:hover { filter: brightness(1.12); }
 
 /* Content wrapper */
 .svc-card__content {
@@ -118,12 +152,12 @@
   padding: 1.5rem 1.75rem 1.75rem;
 }
 
-/* ── Textos OSCUROS (cards impares: 1, 3, 5) ── */
+/* ── Textos cards oscuras (1, 3, 5) ── */
 .svc-card:nth-child(odd) .svc-card__num {
   color: rgba(255,255,255,0.35);
 }
 .svc-card:nth-child(odd):hover .svc-card__num {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.60);
 }
 .svc-card:nth-child(odd) .svc-card__title { color: #ffffff; }
 .svc-card:nth-child(odd) .svc-card__desc  { color: rgba(255,255,255,0.62); }
@@ -136,12 +170,12 @@
   border-color: rgba(255,255,255,0.55);
 }
 
-/* ── Textos GRISES (cards pares: 2, 4, 6) ────── */
+/* ── Textos cards medias (2, 4, 6) ────── */
 .svc-card:nth-child(even) .svc-card__num {
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.50);
 }
 .svc-card:nth-child(even):hover .svc-card__num {
-  color: rgba(255,255,255,0.70);
+  color: rgba(255,255,255,0.75);
 }
 .svc-card:nth-child(even) .svc-card__title { color: #ffffff; }
 .svc-card:nth-child(even) .svc-card__desc  { color: rgba(255,255,255,0.72); }
@@ -226,9 +260,10 @@
   opacity: 0;
   transition: opacity 0.4s ease;
 }
-.svc-card:nth-child(odd)::after  { background: linear-gradient(90deg, #444, #888); }
-.svc-card:nth-child(even)::after { background: linear-gradient(90deg, rgba(255,255,255,0.35), rgba(255,255,255,0.10)); }
+.svc-card:nth-child(odd)::after  { background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.45)); }
+.svc-card:nth-child(even)::after { background: linear-gradient(90deg, rgba(255,255,255,0.30), rgba(255,255,255,0.12)); }
 .svc-card:hover::after { opacity: 1; }
+
 
 /* ── MOBILE ─────────────────────────────────── */
 @media (max-width: 900px) {
@@ -250,4 +285,8 @@
   .svc-card__content { padding: 1rem 1.25rem 1.25rem; }
   .svc-card__detail  { grid-template-rows: 1fr; opacity: 1; }
   .svc-card__detail-inner { overflow: visible; }
+  /* Pausa animación en mobile para ahorrar batería */
+  .services-section::before {
+    animation-play-state: paused;
+  }
 }
