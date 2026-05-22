@@ -155,20 +155,18 @@ body.ready .page-wrap { opacity: 1; }
   overflow: hidden;
 }
 
-/* Background image with dark overlay */
 .scene--diagnostic::before {
   content: '';
   position: absolute;
-  inset: -8%;
-  background-image: url('../images/Fondo web 2.png');
+  inset: -25%;
+  background-image: url('../images/Fondo web 3.png');
   background-size: cover;
   background-position: center;
-  animation: diagBgDrift 30s ease-in-out infinite alternate;
   will-change: transform;
   z-index: 0;
+  transform: translateY(var(--diag-parallax, 0px));
 }
 
-/* Dark gradient overlay — keeps all text legible */
 .scene--diagnostic::after {
   content: '';
   position: absolute;
@@ -181,13 +179,6 @@ body.ready .page-wrap { opacity: 1; }
   );
   z-index: 1;
   pointer-events: none;
-}
-
-@keyframes diagBgDrift {
-  0%   { transform: scale(1.06) translate(0%,    0%);   }
-  33%  { transform: scale(1.09) translate(-1.5%, 0.8%); }
-  66%  { transform: scale(1.08) translate(-2%,  -0.6%); }
-  100% { transform: scale(1.06) translate(0%,    0%);   }
 }
 
 /* All direct children must sit above the overlays */

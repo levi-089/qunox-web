@@ -114,6 +114,21 @@ export function initScrollAnimations(qunoxScene) {
     }
   });
 
+  // ── DIAGNOSTIC: parallax background ─────────
+  const diagSection = document.getElementById('scene-diagnostic');
+  if (diagSection) {
+    ScrollTrigger.create({
+      trigger: diagSection,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true,
+      onUpdate: self => {
+        const offset = (self.progress - 0.5) * 160;
+        diagSection.style.setProperty('--diag-parallax', offset + 'px');
+      }
+    });
+  }
+
   // ── DIAGNOSTIC: scan reveals ─────────────────
   gsap.from('.diagnostic__intro', {
     scrollTrigger: { trigger: '#scene-diagnostic', start: 'top 75%', toggleActions: 'play none none reverse' },
