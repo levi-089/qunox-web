@@ -6,28 +6,28 @@
 .svc-video-hero {
   position: relative;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
   background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .svc-video-hero__video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100vh;
 }
 
-/* Overlay muy sutil — solo para el scroll hint sea legible */
+/* Overlay sutil en la parte inferior para el scroll hint */
 .svc-video-hero__overlay {
   position: absolute;
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.35) 0%,
-    transparent 40%
+    rgba(0, 0, 0, 0.45) 0%,
+    transparent 30%
   );
   pointer-events: none;
   z-index: 1;
