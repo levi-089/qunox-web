@@ -2,7 +2,75 @@
    QUNOX — Servicios Overview Page
    ================================================ */
 
-/* Grid container — fills viewport below nav */
+/* ── VIDEO HERO ─────────────────────────────── */
+.svc-video-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.svc-video-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Overlay muy sutil — solo para el scroll hint sea legible */
+.svc-video-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.35) 0%,
+    transparent 40%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Scroll hint */
+.svc-video-hero__scroll {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.svc-video-hero__scroll-text {
+  font-family: var(--font-b, 'Inter', sans-serif);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.svc-video-hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.45);
+  transform-origin: top;
+  animation: svcScrollLine 1.8s cubic-bezier(0.16,1,0.3,1) infinite 0.8s;
+}
+
+@keyframes svcScrollLine {
+  0%    { transform: scaleY(0); transform-origin: top; }
+  50%   { transform: scaleY(1); transform-origin: top; }
+  50.1% { transform: scaleY(1); transform-origin: bottom; }
+  100%  { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ── Grid container — fills viewport below nav */
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
