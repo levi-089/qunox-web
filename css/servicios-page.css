@@ -111,35 +111,18 @@
 
 
 /* ── SERVICES SECTION WRAPPER ────────────────── */
-/* Contenedor con la imagen de fondo animada que
-   subyace todas las tarjetas del grid.            */
+/* Transparente: el video pinneado se ve a través
+   de los fondos semitransparentes de cada card.  */
 .services-section {
   position: relative;
-  overflow: hidden;
-  z-index: 2; /* sobre el video pinneado */
+  z-index: 2;      /* sobre el video pinneado (z-index:1) */
+  background: transparent;
+  overflow: visible;
 }
 
-/* Capa de imagen — separada del DOM para animarse
-   con GPU sin afectar el layout de las cards.     */
+/* Sin imagen de fondo — el video es el fondo real */
 .services-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url('../images/Fondo web 4.jpg') center / cover no-repeat;
-  /* scale(1.18) da margen para el drift sin revelar bordes */
-  animation: svcBgDrift 40s ease-in-out infinite;
-  z-index: 0;
-  will-change: transform;
-}
-
-/* Movimiento continuo y orgánico de la imagen    */
-@keyframes svcBgDrift {
-  0%   { transform: translate(  0%,    0%)  scale(1.18); }
-  20%  { transform: translate(-2.5%, -1.5%) scale(1.18); }
-  40%  { transform: translate(-4%,   -3.5%) scale(1.18); }
-  60%  { transform: translate(-2%,   -5%)   scale(1.18); }
-  80%  { transform: translate( 1.5%, -2.5%) scale(1.18); }
-  100% { transform: translate(  0%,    0%)  scale(1.18); }
+  display: none;
 }
 
 
@@ -150,7 +133,7 @@
   grid-template-rows: repeat(2, 1fr);
   height: calc(100vh - 90px);
   gap: 2px;
-  background: #0a0a0a; /* separador sólido sin tinte de la imagen */
+  background: rgba(0, 0, 0, 0.75); /* líneas entre cards oscuras pero no opacas */
   position: relative;
   z-index: 1; /* sobre el ::before del wrapper */
 }
@@ -206,13 +189,13 @@
 .svc-card__img    { display: none; }
 .svc-card__overlay { display: none; }
 
-/* ── Fondos semitransparentes: la imagen se ve a través ── */
-.svc-card:nth-child(1) { background: rgba(58, 50, 44, 0.38); } /* Soporte        → #3A322C muy transparente */
-.svc-card:nth-child(2) { background: rgba(55, 55, 55, 0.55); } /* Optimización   → gris medio */
-.svc-card:nth-child(3) { background: rgba(52, 45, 39, 0.38); } /* Implementación → #3A322C muy transparente */
-.svc-card:nth-child(4) { background: rgba(48, 48, 48, 0.55); } /* DR             → gris medio */
-.svc-card:nth-child(5) { background: rgba(45, 38, 33, 0.38); } /* Multi-Cloud    → #3A322C muy transparente */
-.svc-card:nth-child(6) { background: rgba(50, 50, 50, 0.55); } /* Ciberseguridad → gris medio */
+/* ── Fondos semitransparentes: el video se ve a través ── */
+.svc-card:nth-child(1) { background: rgba(58, 50, 44, 0.52); } /* Soporte        → #3A322C */
+.svc-card:nth-child(2) { background: rgba(30, 30, 30, 0.52); } /* Optimización   → gris oscuro */
+.svc-card:nth-child(3) { background: rgba(52, 45, 39, 0.52); } /* Implementación → #3A322C */
+.svc-card:nth-child(4) { background: rgba(28, 28, 28, 0.52); } /* DR             → gris oscuro */
+.svc-card:nth-child(5) { background: rgba(45, 38, 33, 0.52); } /* Multi-Cloud    → #3A322C */
+.svc-card:nth-child(6) { background: rgba(25, 25, 25, 0.52); } /* Ciberseguridad → gris oscuro */
 
 /* Hover — anula main.css y aplica la propia animación */
 .svc-card:hover {
