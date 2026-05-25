@@ -9,11 +9,13 @@
 
 /* ── NAV & HEADER — nueva colorimetría #6D001A ──── */
 
-/* Logo horizontal — ajuste de altura */
+/* Logo horizontal — sin caja blanca, más grande */
 .nav-logo-img {
-  height: 42px !important;
-  max-height: 42px !important;
+  height: 54px !important;
+  max-height: 54px !important;
   width: auto !important;
+  mix-blend-mode: multiply;   /* elimina el fondo blanco del PNG */
+  background: transparent !important;
 }
 
 /* Botón primario CTA */
@@ -35,9 +37,15 @@
 .nav-links a.active {
   color: #6D001A !important;
 }
-/* Línea indicadora bajo el link */
+/* Línea indicadora — solo visible al hacer hover, NO en estado activo */
 .nav-links a::after {
   background: linear-gradient(90deg, #6D001A, #a0002a) !important;
+}
+.nav-links a.active::after {
+  transform: scaleX(0) !important; /* sin subrayado permanente */
+}
+.nav-links a:hover::after {
+  transform: scaleX(1) !important; /* solo aparece al pasar el mouse */
 }
 
 /* Menú mobile */
