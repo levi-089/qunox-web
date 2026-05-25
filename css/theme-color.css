@@ -163,7 +163,7 @@
 
 /* ── SCENE 5 — CLOSING CTA ───────────────────── */
 .scene--closing {
-  background: #F4F5F8 !important;
+  background: #FFFFFF !important;
 }
 
 /* Top fade — glow sutil en tono #6D001A */
@@ -260,18 +260,17 @@
 }
 
 /* Ghost button "Ver todos los servicios" — texto #6D001A */
-.btn-closing-ghost {
+.btn-closing-ghost,
+.btn-closing-ghost:link,
+.btn-closing-ghost:visited {
   border-color: rgba(109, 0, 26, 0.30) !important;
   color: #6D001A !important;
 }
-.btn-closing-ghost:hover {
+.btn-closing-ghost:hover,
+.btn-closing-ghost:focus {
   border-color: #6D001A !important;
   color: #6D001A !important;
   background: rgba(109, 0, 26, 0.05) !important;
-}
-.btn-closing-ghost:hover {
-  border-color: var(--blue, #4361EE) !important;
-  background: rgba(67, 97, 238, 0.05) !important;
 }
 
 
