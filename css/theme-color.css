@@ -418,6 +418,54 @@ footer::before {
 }
 
 
+/* ── CONTACT PAGE — color overrides ─────────────
+   Reemplaza todos los azules de la página de contacto
+   con la paleta crimson #6D001A de la marca.
+   ─────────────────────────────────────────────── */
+
+/* "HABLEMOS" — línea decorativa + texto */
+.label::before {
+  background: #6D001A !important;
+}
+.contact-left-top .label {
+  color: #6D001A !important;
+}
+
+/* Badges de iconos (email, tiempo, evaluación) */
+.ci-icon {
+  background: rgba(109, 0, 26, 0.20) !important;
+  color: #c0304a !important;
+}
+
+/* Resplandor decorativo en el panel izquierdo */
+.contact-visual {
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(109, 0, 26, 0.30) 0%,
+    transparent 70%
+  ) !important;
+  opacity: 0.22 !important;
+}
+
+/* Focus en campos del formulario */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: rgba(109, 0, 26, 0.60) !important;
+  box-shadow: 0 0 0 3px rgba(109, 0, 26, 0.12) !important;
+}
+
+/* Botón "Solicita evaluación técnica" */
+.form-submit {
+  background: linear-gradient(135deg, #6D001A 0%, #3a000f 100%) !important;
+}
+.form-submit:hover {
+  opacity: 1 !important;
+  background: linear-gradient(135deg, #8a0020 0%, #4d0015 100%) !important;
+  box-shadow: 0 6px 24px rgba(109, 0, 26, 0.45) !important;
+}
+
+
 /* ── RESPONSIVE — MOBILE
    Revert the large left-gutter offsets on small screens
    where the title area has no horizontal padding room.

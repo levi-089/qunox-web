@@ -57,38 +57,18 @@
     reveals.forEach(el => obs.observe(el));
   }
 
-  /* ── CONTACT FORM ───────────────────────────── */
-  /*
-    APPS SCRIPT SETUP:
-    1. Go to script.google.com → New project
-    2. Paste this code:
+  /* ── CONTACT FORM — Web3Forms ───────────────────
+     Servicio gratuito para envío de formularios en
+     sitios estáticos (sin backend).
 
-       function doPost(e) {
-         try {
-           var d = JSON.parse(e.postData.contents);
-           GmailApp.sendEmail(
-             'soluciones@qunox.net',
-             'QUNOX | Contacto: ' + d.nombre,
-             'Nombre: '  + d.nombre  + '\n' +
-             'Empresa: ' + (d.empresa||'—') + '\n' +
-             'Email: '   + d.email   + '\n\n' +
-             'Mensaje:\n' + d.mensaje
-           );
-           return ContentService
-             .createTextOutput(JSON.stringify({status:'ok'}))
-             .setMimeType(ContentService.MimeType.JSON);
-         } catch(err) {
-           return ContentService
-             .createTextOutput(JSON.stringify({status:'error'}))
-             .setMimeType(ContentService.MimeType.JSON);
-         }
-       }
-
-    3. Deploy → New deployment → Web app
-       Execute as: Me | Access: Anyone
-    4. Copy the URL and replace APPS_SCRIPT_URL below
-  */
-  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+     ACTIVACIÓN:
+     1. Ve a https://web3forms.com/
+     2. Ingresa "soluciones@qunox.net" y haz clic en
+        "Create Access Key"
+     3. Revisa el correo y copia la clave que te envían
+     4. Reemplaza 'TU_CLAVE_WEB3FORMS' abajo con esa clave
+     ─────────────────────────────────────────────── */
+  const WEB3FORMS_KEY = 'TU_CLAVE_WEB3FORMS';
 
   const form = document.getElementById('contact-form');
   const formBtn = document.getElementById('form-btn');
@@ -112,21 +92,34 @@
       formBtn.textContent = 'Enviando...';
 
       try {
-        if (APPS_SCRIPT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+        if (WEB3FORMS_KEY === 'TU_CLAVE_WEB3FORMS') {
+          /* Clave no configurada — simula envío para pruebas visuales */
           await new Promise(r => setTimeout(r, 800));
         } else {
-          await fetch(APPS_SCRIPT_URL, {
+          const res = await fetch('https://api.web3forms.com/submit', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nombre, empresa, email, rol, mensaje })
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              access_key: WEB3FORMS_KEY,
+              subject:    'QUNOX | Nuevo contacto: ' + nombre,
+              from_name:  'QUNOX Web',
+              replyto:    email,
+              nombre,
+              empresa:    empresa || '—',
+              email,
+              rol:        rol     || '—',
+              mensaje
+            })
           });
+          const data = await res.json();
+          if (!data.success) throw new Error(data.message || 'Error');
         }
         form.style.display = 'none';
         if (formSuccess) formSuccess.style.display = 'block';
-      } catch {
+      } catch (err) {
         formBtn.disabled = false;
-        formBtn.textContent = 'Enviar mensaje';
-        alert('Error al enviar. Escríbenos a soluciones@qunox.net');
+        formBtn.textContent = 'Solicita evaluación técnica';
+        alert('Error al enviar el formulario.\nEscríbenos directamente a soluciones@qunox.net');
       }
     });
   }
