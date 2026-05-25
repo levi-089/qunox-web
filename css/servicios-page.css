@@ -190,11 +190,11 @@
 .svc-card__overlay { display: none; }
 
 /* ── Fondos semitransparentes: el video se ve a través ── */
-.svc-card:nth-child(1) { background: rgba(109, 0, 26, 0.58); } /* Soporte        → #6D001A */
+.svc-card:nth-child(1) { background: rgba(109, 0, 26, 0.20); } /* Soporte        → #6D001A 80% transparente */
 .svc-card:nth-child(2) { background: rgba(30, 30, 30, 0.52); }  /* Optimización   → gris oscuro */
-.svc-card:nth-child(3) { background: rgba(109, 0, 26, 0.58); } /* Implementación → #6D001A */
+.svc-card:nth-child(3) { background: rgba(109, 0, 26, 0.20); } /* Implementación → #6D001A 80% transparente */
 .svc-card:nth-child(4) { background: rgba(28, 28, 28, 0.52); }  /* DR             → gris oscuro */
-.svc-card:nth-child(5) { background: rgba(109, 0, 26, 0.58); } /* Multi-Cloud    → #6D001A */
+.svc-card:nth-child(5) { background: rgba(109, 0, 26, 0.20); } /* Multi-Cloud    → #6D001A 80% transparente */
 .svc-card:nth-child(6) { background: rgba(25, 25, 25, 0.52); }  /* Ciberseguridad → gris oscuro */
 
 /* Hover — anula main.css y aplica la propia animación */
