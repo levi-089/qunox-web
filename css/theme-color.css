@@ -291,15 +291,11 @@
 
 /* ── SCENE — NUESTRAS MARCAS (partners) ───────── */
 .scene--partners {
-  /* Arranca en negro, abre al rojo marca, cierra suave */
+  /* Base #6D001A + patrón de puntos casi imperceptible */
   background:
-    linear-gradient(
-      180deg,
-      #000000 0%,
-      #6D001A 18%,
-      #6D001A 82%,
-      #000000 100%
-    ) !important;
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px),
+    #6D001A !important;
+  background-size: 22px 22px, auto !important;
 }
 
 /* Label */
@@ -340,15 +336,11 @@
 
 /* ── SCENE — EMPRESAS QUE CONFÍAN EN QUNOX (clients) ── */
 .scene--clients {
-  /* Espejo del anterior: continúa rojo, cierra en negro */
+  /* Mismo patrón de puntos — continuidad visual con partners */
   background:
-    linear-gradient(
-      180deg,
-      #000000 0%,
-      #6D001A 18%,
-      #6D001A 82%,
-      #000000 100%
-    ) !important;
+    radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px),
+    #6D001A !important;
+  background-size: 22px 22px, auto !important;
   border-top: none !important;
 }
 
@@ -399,9 +391,7 @@
 
 
 /* ── FOOTER ACCENT
-   A thin blue-to-purple rule at the very top of the
-   footer — separates the dark footer from the light
-   clients section with brand colour.
+   Línea superior del footer en color marca #6D001A.
    ─────────────────────────────────────────────── */
 footer::before {
   content: '';
@@ -409,10 +399,13 @@ footer::before {
   height: 2px;
   background: linear-gradient(
     90deg,
-    var(--blue, #4361EE) 0%,
-    var(--purple, #7209B7) 100%
+    transparent 0%,
+    #6D001A 20%,
+    #a0002a 50%,
+    #6D001A 80%,
+    transparent 100%
   );
-  margin-bottom: 0; /* sits flush at footer top */
+  margin-bottom: 0;
 }
 
 
