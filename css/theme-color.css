@@ -9,22 +9,22 @@
 
 /* ── NAV ENCABEZADO — fondo negro + colorimetría #6D001A ── */
 
-/* Fondo negro en el nav */
-#nav {
+/* Fondo negro constante — en reposo Y al hacer scroll */
+#nav,
+#nav.scrolled {
   background: #000000 !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.10) !important;
 }
 #nav.scrolled {
-  box-shadow: 0 2px 24px rgba(0,0,0,0.70) !important;
-  border-color: rgba(255,255,255,0.12) !important;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.80) !important;
 }
 
-/* Logo — fondo negro nativo, sin blend mode */
+/* Logo — más grande, fondo negro nativo */
 .nav-logo-img {
-  height: 54px !important;
-  max-height: 54px !important;
+  height: 68px !important;
+  max-height: 68px !important;
   width: auto !important;
   mix-blend-mode: normal !important;
   background: transparent !important;
@@ -56,16 +56,16 @@
 
 /* Botón primario CTA */
 .btn-primary {
-  background: #6D001A !important;
-  box-shadow: 0 2px 8px rgba(109,0,26,0.28) !important;
+  background: #7C7C7C !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
 }
 .btn-primary:hover {
-  background: #560015 !important;
-  box-shadow: 0 6px 24px rgba(109,0,26,0.40) !important;
+  background: #636363 !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35) !important;
 }
 .btn-primary:active {
-  background: #6D001A !important;
-  box-shadow: 0 2px 8px rgba(109,0,26,0.28) !important;
+  background: #7C7C7C !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25) !important;
 }
 
 /* Menú mobile */
